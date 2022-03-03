@@ -19,9 +19,9 @@ module.exports = (bookshelf) => {
 			return await new this({ id }).fetch(fetchOptions);
 		},
 
-		async login(username, password) {
-			// Hitta användare med användarnamnet (return false om användaren inte finns)
-			const user = await new this({ username }).fetch({ require: false });
+		async login(email, password) {
+			// Hitta användare med email (return false om email inte finns)
+			const user = await new this({ email }).fetch({ require: false });
 			if (!user) {
 				return false;
 			}
