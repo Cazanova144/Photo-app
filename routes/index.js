@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middlewares/auth');
 
 /* GET / */
 router.get('/', (req, res, next) => {
@@ -9,6 +8,6 @@ router.get('/', (req, res, next) => {
 
 router.use('/albums', require('./albums'));
 router.use('/photos', require('./photos'));
-router.use('/users', auth.basic, require('./users'));
+router.use('/users', require('./users'));
 
 module.exports = router;
