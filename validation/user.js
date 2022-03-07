@@ -12,9 +12,8 @@ const models = require('../models');
  * Optional: -
  */
 const createRules = [
-	body('email').exists().isLength({ min: 3 }).custom(async value => {
+	body('email').exists().isEmail().isLength({ min: 3 }).custom(async value => {
 		const user = await new models.User({ email: value }).fetch({ require: false });
-        // let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 		if (user) {
 			return Promise.reject("Email is already registered.");
