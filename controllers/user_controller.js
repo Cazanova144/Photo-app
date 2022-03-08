@@ -53,6 +53,16 @@ const store = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
+		validData.password = await bcrypt.hash(validData.password, 10);
+	} catch {
+		res.status(500).send({
+			status: 'error',
+			message: 'Exception thrown in database when hashing the password.',
+		});
+		throw error;
+	}
+
+	try {
 		const user = await new models.User(validData).save();
 		debug("Created new example successfully: %O", user);
 

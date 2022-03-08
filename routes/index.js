@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middlewares/auth');
+const registerController = require('../controllers/register_controller');
+const userValidationRules = require('../validation/user');
+
 
 /* GET / */
 router.get('/', (req, res, next) => {
@@ -8,6 +12,9 @@ router.get('/', (req, res, next) => {
 
 router.use('/albums', require('./albums'));
 router.use('/photos', require('./photos'));
-router.use('/users', require('./users'));
+router.use('/users', auth.basic, require('./users'));
+
+// register a new user
+router.post('/register', userValidationRules.createRules, registerController.register);
 
 module.exports = router;
