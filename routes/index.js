@@ -10,8 +10,8 @@ router.get('/', (req, res, next) => {
 	res.send({ success: true, data: { msg: 'oh, hi' }});
 });
 
-router.use('/albums', require('./albums'));
-router.use('/photos', require('./photos'));
+router.use('/albums', auth.basic, require('./albums'));
+router.use('/photos', auth.basic, require('./photos'));
 router.use('/users', auth.basic, require('./users'));
 
 // register a new user
