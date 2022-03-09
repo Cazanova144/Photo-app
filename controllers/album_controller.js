@@ -16,7 +16,9 @@ const index = async (req, res) => {
 
 	res.send({
 		status: 'success',
-		data: all_albums,
+		data: {
+            all_albums,
+        }
 	});
 }
 
@@ -40,7 +42,7 @@ const show = async (req, res) => {
 /**
  * Store a new resource
  *
- * POST /:albumId/photos
+ * POST /
  */
 const store = async (req, res) => {
 	// check for any validation errors
@@ -50,27 +52,28 @@ const store = async (req, res) => {
 	}
 
 	// get only the validated data from the request
-	const validData = matchedData(req);
+	const validData = matchedData(req); 
 
-	try {
-		const album = await new models.Album(validData).save();
-		debug("Created new example successfully: %O", album);
+    validData.user_id = req.user.id;
 
-		res.send({
-			status: 'success',
-			data: {
-                album,
-            }
-		});
+    try {
 
-	} catch (error) {
-		res.status(500).send({
-			status: 'error',
-			message: 'Exception thrown in database when creating a new album.',
-		});
-		throw error;
-	}
-}
+        const album = await new models.Album(validData).save();
+        debug('Created new album successfully: %O', album);
+
+        res.send({
+            status: 'success',
+            data: album,
+            });
+    } catch (error) {
+        res.status(500).send({
+            status: 'error',
+            message: 'Exception thrown when attempting to add album.'
+        });
+        throw error;
+    
+    }
+};
 
 /**
  * Update a specific resource

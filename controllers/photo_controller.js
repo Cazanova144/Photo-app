@@ -54,6 +54,8 @@ const store = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
 
+    validData.user_id = req.user.id;
+
 	try {
 		const photo = await new models.Photo(validData).save();
 		debug("Created new example successfully: %O", photo);
@@ -103,18 +105,18 @@ const update = async (req, res) => {
 	const validData = matchedData(req);
 
 	try {
-		const updatedPhoto = await example.save(validData);
+		const updatedPhoto = await photo.save(validData);
 		debug("Updated example successfully: %O", updatedPhoto);
 
 		res.send({
 			status: 'success',
-			data: example,
+			data: photo,
 		});
 
 	} catch (error) {
 		res.status(500).send({
 			status: 'error',
-			message: 'Exception thrown in database when updating a new example.',
+			message: 'Exception thrown in database when updating a new photo.',
 		});
 		throw error;
 	}
