@@ -76,6 +76,69 @@ const store = async (req, res) => {
 };
 
 /**
+ * Add photo to album
+ * 
+ * POST /:albumId/photos
+ */ 
+const addPhotoToAlbum = async (req, res) => {
+	// get only the validated data from the request
+	const validData = matchedData(req);
+
+	const albumId = req.params.albumId;
+
+	const user = await models.User.fetchById(req.user.id, { 
+		withRelated: ['albums', 'photos']
+	});
+
+	const album = await new models.Album({ id: albumId }).fetch({ require: false});
+
+	if (!album) {
+		debug('Album was not found. %o', { id: req.params.albumId });
+		res.status(404).send({
+			status: 'fail',
+			data: 'Album Not Found',
+		});
+		return;
+	}
+
+	// check for any validation errors
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(422).send({ status: 'fail', data: errors.array() });
+	}
+
+	const userAlbum = user.related('albums').find(album => album.id == req.params.albumId);
+	const userPhoto = user.related('photos').find(photo => photo.id == validData.photo_id);
+
+	if (!userAlbum || !userPhoto) {
+		debug('Cannot add photo to album you do not own. %o', {
+			id: req.params.albumId,
+		});
+		res.status(403).send({
+			status: 'fail',
+			data: "Action denied. This album doesn't belong to you!",
+		});
+		return;
+	}
+
+	try {
+		const result = await album.photos().attach(validData.photo_id);
+		debug('Added photo to album successfully: %O', result);
+
+		res.send({
+			status: 'success',
+			data: null,
+		});
+	} catch (error) {
+		res.status(500).send({
+			status: 'error',
+			message: 'Exception thrown in database when adding a photo to an album.',
+		});
+		throw error;
+	}
+} 
+
+/**
  * Update a specific resource
  *
  * PUT /:albumId
@@ -137,6 +200,7 @@ module.exports = {
 	index,
 	show,
 	store,
+	addPhotoToAlbum,
 	update,
 	destroy,
 }
