@@ -26,7 +26,7 @@ const updateRules = [
 ];
 
 const addPhotoRules = [
-	body('photo_id').exists().isLength({ min: 3 }).custom(async value => {
+	body('photo_id').exists().isInt().custom(async value => {
 		const photo = await new models.Photo({ id: value }).fetch({ require: false });
 
 		if (!photo) {
