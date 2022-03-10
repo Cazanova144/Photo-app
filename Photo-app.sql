@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: localhost
--- Tid vid skapande: 10 mars 2022 kl 17:43
+-- Tid vid skapande: 10 mars 2022 kl 22:08
 -- Serverversion: 5.7.34
 -- PHP-version: 7.4.21
 
@@ -38,11 +38,11 @@ CREATE TABLE `albums` (
 --
 
 INSERT INTO `albums` (`id`, `title`, `user_id`) VALUES
-(1, 'Fire_memes', 1),
-(2, 'Cat_photos', 1),
-(3, 'Dev_notes', 2),
-(4, 'Nuclear-launch-codes', 3),
-(5, 'Random-album', 13);
+(1, 'Fire_memes', 14),
+(2, 'Cat_photos', 14),
+(3, 'Dev_notes', 15),
+(4, 'Nuclear-launch-codes', 16),
+(5, 'Random-album', 18);
 
 -- --------------------------------------------------------
 
@@ -63,12 +63,12 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`id`, `title`, `url`, `comment`, `user_id`) VALUES
-(1, 'Very_nice_meme', 'https://preview.redd.it/19fq7c002w021.png?width=960&crop=smart&auto=webp&s=6f07026d1381361b7a1716442cfc86c85d567047', 'such_wow', 1),
-(2, 'Notes_1', 'https://thumbs.dreamstime.com/z/programming-coding-source-code-screen-abstract-software-developer-computer-script-55910605.jpg', 'javascript notes', 2),
-(3, 'Codes_1', 'https://c7.alamy.com/comp/2AM322N/hacking-nuclear-launch-code-password-concept-2AM322N.jpg', '', 3),
-(4, 'Confetti Photo', 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30', 'Confetti', 13),
-(5, 'cursed-image', 'https://lh3.googleusercontent.com/2hDpuTi-0AMKvoZJGd-yKWvK4tKdQr_kLIpB_qSeMau2TNGCNidAosMEvrEXFO9G6tmlFlPQplpwiqirgrIPWnCKMvElaYgI-HiVvXc=w600', '', 13),
-(6, 'cursed-image-2', 'https://www.coogfans.com/uploads/db5902/original/3X/8/1/81173237ffa580ef710b0862fdddaac163274db1.jpeg', NULL, 13);
+(1, 'Very_nice_meme', 'https://preview.redd.it/19fq7c002w021.png?width=960&crop=smart&auto=webp&s=6f07026d1381361b7a1716442cfc86c85d567047', 'such_wow', 14),
+(2, 'Notes_1', 'https://thumbs.dreamstime.com/z/programming-coding-source-code-screen-abstract-software-developer-computer-script-55910605.jpg', 'javascript notes', 15),
+(3, 'Codes_1', 'https://c7.alamy.com/comp/2AM322N/hacking-nuclear-launch-code-password-concept-2AM322N.jpg', '', 16),
+(4, 'Confetti Photo', 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30', 'Confetti', 18),
+(5, 'cursed-image', 'https://lh3.googleusercontent.com/2hDpuTi-0AMKvoZJGd-yKWvK4tKdQr_kLIpB_qSeMau2TNGCNidAosMEvrEXFO9G6tmlFlPQplpwiqirgrIPWnCKMvElaYgI-HiVvXc=w600', '', 18),
+(6, 'cursed-image-2', 'https://www.coogfans.com/uploads/db5902/original/3X/8/1/81173237ffa580ef710b0862fdddaac163274db1.jpeg', '', 18);
 
 -- --------------------------------------------------------
 
@@ -112,18 +112,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`) VALUES
-(1, 'johan@developer.com', 'ilovejava123', 'Johan', 'Nordström'),
-(2, 'cazpian@noob.com', 'goodpassword1337', 'Cazpian', 'Levén'),
-(3, 'cat@kitten.com', '<3tunafish', 'Mister', 'Whiskers'),
-(4, 'jn@badcameraphotography.com', 'omg-smile', 'Bobo', 'Smith'),
-(5, 'test@user.com', 'secret_password', 'John', 'Smith'),
-(7, 'test@user2.com', 'secret_password', 'Johan', 'Smith'),
-(8, 'test@user3.com', 'secret_password', 'Johansson', 'Smith'),
-(9, 'test@user4.com', 'secret_password', 'Joan', 'Smith'),
-(10, 'test@user5.com', 'secret_password42', 'Ben', 'Jerry'),
-(11, 'test@user6.com', 'secret_password42', 'Jen', 'Berry'),
-(12, 'ooaa@aaoo.com', '$2b$10$u/W0QbgjPupX1sb68nywquIAcYStH8y4.csCecatNLN0DqKpPTx4u', 'John', 'Cena'),
-(13, 'random@user.com', '$2b$10$ecG.Jku/qOb1igxN.OD/qePxZ9bCSCGPYVAtsXvymRK8xF3QwJdv2', 'random', 'user');
+(14, 'johan@developer.com', '$2b$10$AoL1disHqktPD4uBslVonugNiSifXlpR1APM3NHkrvCtMlVdi/kKy', 'Johan', 'Nordström'),
+(15, 'cazpian@noob.com', '$2b$10$Hps83Jr0Ct3T9uEntM7.v.T4JnMsPVbOsUXl6fbKp.2.TTR1jTjOy', 'Cazpian', 'Levén'),
+(16, 'cat@kitten.com', '$2b$10$wN5RdQy8C7aKVghDmG9EGeRndtUTqSWrnnOr/yWtJTsy5phjvdf6.', 'Mister', 'Whiskers'),
+(17, 'ooaa@aaoo.com', '$2b$10$DQGyJ6c5qW4tRT0p/QQMk.GyUsLfnR.XypRgphkzo8FFzKhN6.I4C', 'Ooaa', 'Aaoo'),
+(18, 'random@user.com', '$2b$10$J.eHPLDIZePg5hZwvD8JV.UyKDNfPI5F4uDgNWvO7UZVVFP3YF97.', 'Random', 'User');
 
 --
 -- Index för dumpade tabeller
@@ -183,7 +176,7 @@ ALTER TABLE `photos_albums`
 -- AUTO_INCREMENT för tabell `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restriktioner för dumpade tabeller
