@@ -6,9 +6,9 @@ const { body } = require('express-validator');
 const models = require('../models');
 
 /**
- * Create User validation rules
+ * Create Album validation rules
  *
- * Required: username, password, first_name, last_name
+ * Required: title
  * Optional: -
  */
 const createRules = [
@@ -16,15 +16,22 @@ const createRules = [
 ];
 
 /**
- * Update User validation rules
+ * Update Album validation rules
  *
  * Required: -
- * Optional: password, first_name, last_name
+ * Optional: title
  */
 const updateRules = [
 	body('title').exists().isLength({ min: 3 }),
 ];
 
+
+/**
+ * Add Photo to Album validation rules
+ * 
+ * Required: photo_id
+ * Optional: -
+ */
 const addPhotoRules = [
 	body('photo_id').exists().isInt().custom(async value => {
 		const photo = await new models.Photo({ id: value }).fetch({ require: false });

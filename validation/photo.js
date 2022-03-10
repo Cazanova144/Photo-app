@@ -3,13 +3,12 @@
  */
 
 const { body } = require('express-validator');
-const models = require('../models');
 
 /**
- * Create User validation rules
+ * Create Photo validation rules
  *
- * Required: username, password, first_name, last_name
- * Optional: -
+ * Required: title, url
+ * Optional: comment
  */
 const createRules = [
 	body('title').exists().isLength({ min: 3 }),
@@ -18,10 +17,10 @@ const createRules = [
 ];
 
 /**
- * Update User validation rules
+ * Update Photo validation rules
  *
  * Required: -
- * Optional: password, first_name, last_name
+ * Optional: title, url, comment
  */
 const updateRules = [
 	body('title').optional().isLength({ min: 3 }),

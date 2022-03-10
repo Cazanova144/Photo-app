@@ -8,7 +8,7 @@ const models = require('../models');
 /**
  * Create User validation rules
  *
- * Required: username, password, first_name, last_name
+ * Required: email, password, first_name, last_name
  * Optional: -
  */
 const createRules = [

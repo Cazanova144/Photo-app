@@ -86,6 +86,7 @@ const addPhotoToAlbum = async (req, res) => {
 
 	const albumId = req.params.albumId;
 
+	// Kunde inte göra detta så som "const album", så hämtade modellen såhär istället
 	const user = await models.User.fetchById(req.user.id, { 
 		withRelated: ['albums', 'photos']
 	});

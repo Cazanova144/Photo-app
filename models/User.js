@@ -21,21 +21,21 @@ module.exports = (bookshelf) => {
 		},
 
 		async login(email, password) {
-			// Hitta användare med email (return false om email inte finns)
+			// find user based on the username (bail if no such user exists)
 			const user = await new this({ email }).fetch({ require: false });
 			if (!user) {
 				return false;
 			}
 			const hash = user.get('password');
 
-			// Hasha lösenordet med saltet från db
-			// Jämför om genererade hashen matchar db-hashen
+			// hash the incoming cleartext password using the salt from the db
+			// and compare if the generated hash matches the db-hash
 			const result = await bcrypt.compare(password, hash);
 			if (!result) {
 				return false;
 			}
 
-			// Om allt funkar, return user
+			// all is well, return user
 			return user;
 		}
 	});
