@@ -1,5 +1,5 @@
 /**
- * User Validation Rules
+ * Photo Validation Rules
  */
 
 const { body } = require('express-validator');
@@ -13,8 +13,8 @@ const models = require('../models');
  */
 const createRules = [
 	body('title').exists().isLength({ min: 3 }),
-	body('url').exists().isLength({ min: 2 }),
-	body('comment').exists().isLength({ min: 3 }),
+	body('url').exists().isURL().isLength({ min: 2 }),
+	body('comment').optional({checkFalsy: true}).isLength({ min: 3 }),
 ];
 
 /**
@@ -25,8 +25,8 @@ const createRules = [
  */
 const updateRules = [
 	body('title').optional().isLength({ min: 3 }),
-	body('url').optional().isLength({ min: 2 }),
-	body('comment').optional().isLength({ min: 3 }),
+	body('url').optional().isURL().isLength({ min: 2 }),
+	body('comment').optional({checkFalsy: true}).isLength({ min: 3 }),
 ];
 
 module.exports = {
