@@ -16,7 +16,7 @@ router.post('/', albumValidationRules.createRules, albumController.store);
 router.put('/:albumId', albumValidationRules.updateRules, albumController.update);
 
 /* Lägg till bild till album */
-router.post('/:albumId/photos', albumValidationRules.createRules, albumController.store);
+router.post('/:albumId/photos', albumValidationRules.addPhotoRules, albumController.addPhotoToAlbum);
 
 /* Destroy a specific resource */
 router.delete('/:albumId', albumController.destroy);
