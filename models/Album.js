@@ -12,5 +12,9 @@ module.exports = (bookshelf) => {
         photos() {
             return this.belongsToMany('Photo', 'photos_albums');
         }
-	});
+	}, {
+        async fetchById(id, fetchOptions = {}) {
+			return await new this({ id }).fetch(fetchOptions);
+		}
+    });
 };

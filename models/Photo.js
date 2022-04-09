@@ -10,7 +10,11 @@ module.exports = (bookshelf) => {
             return this.belongsTo('User'); // photos.user_id
         },
         albums() {
-            return this.belongsToMany('Album');
+            return this.belongsToMany('Album', 'photos_albums');
         }
-	});
+	}, {
+        async fetchById(id, fetchOptions = {}) {
+			return await new this({ id }).fetch(fetchOptions);
+		}
+    });
 };
