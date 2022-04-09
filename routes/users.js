@@ -10,7 +10,7 @@ router.get('/', userController.index);
 router.get('/:userId', userController.show);
 
 /* Store a new resource */
-router.post('/register', userValidationRules.createRules, userController.store);
+// router.post('/register', userValidationRules.createRules, userController.store);
 
 /* Update a specific resource */
 router.put('/:userId', userValidationRules.updateRules, userController.update);

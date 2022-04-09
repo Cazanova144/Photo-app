@@ -17,4 +17,7 @@ router.use('/users', auth.basic, require('./users'));
 // register a new user
 router.post('/register', userValidationRules.createRules, registerController.register);
 
+// login user
+router.post('/login', registerController.login)
+
 module.exports = router;
