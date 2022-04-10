@@ -12,7 +12,7 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const all_photos = await models.Photo.fetchAll();
+	const all_photos = await req.user.load('photos');
 
 	res.send({
 		status: 'success',
@@ -28,15 +28,36 @@ const index = async (req, res) => {
  * GET /:photoId
  */
 const show = async (req, res) => {
+	await req.user.load('photos');
+
 	const photo = await new models.Photo({ id: req.params.photoId })
 		.fetch();
 
-	res.send({
-		status: 'success',
-		data: {
-            photo,
-        },
-	});
+	const specificPhoto = await new models.Photo({ id: req.params.photoId })
+
+	const relatedPhoto = req.user.related('photos');
+	
+	const findPhoto = relatedPhoto.find(photo => photo.id == specificPhoto.id)
+	
+	if (!findPhoto) {
+		return res.status(404).send({
+			status: 'fail',
+			data: 'Photo not found'
+		})
+	}
+	
+	try {
+		res.status(200).send({
+			status: 'success',
+			data: photo
+		})
+	} catch(error) {
+		res.status(500).send({
+			status: 'fail',
+			message: error
+		})
+		throw error
+	}
 }
 
 /**

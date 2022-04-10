@@ -12,7 +12,9 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const all_albums = await models.Album.fetchAll();
+	const all_albums = await req.user.load('albums');
+
+	debug(req.user.load('albums'))
 
 	res.send({
 		status: 'success',
@@ -28,15 +30,36 @@ const index = async (req, res) => {
  * GET /:albumId
  */
 const show = async (req, res) => {
+	await req.user.load('albums');
+
 	const album = await new models.Album({ id: req.params.albumId })
 		.fetch({ withRelated: ['photos'] });
 
-	res.send({
-		status: 'success',
-		data: {
-            album,
-        }
-	});
+	const specificAlbum = await new models.Album({ id: req.params.albumId })
+
+	const relatedAlbum = req.user.related('albums');
+
+	const findAlbum = relatedAlbum.find(album => album.id == specificAlbum.id)
+
+	if (!findAlbum) {
+		return res.status(404).send({
+			status: 'fail',
+			data: 'Album not found'
+		})
+	}
+
+	try {
+		res.status(200).send({
+            status: 'success',
+            data: album
+        })
+	} catch(error) {
+		res.status(500).send({
+            status: 'fail',
+            message: error
+        })
+		throw error
+	}
 }
 
 /**
@@ -45,6 +68,12 @@ const show = async (req, res) => {
  * POST /
  */
 const store = async (req, res) => {
+	const userId = req.user.get('id')
+
+	debug(userId)
+
+	const user = await models.User.fetchById(userId, { withRelated: ['albums'] });
+
 	// check for any validation errors
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -54,7 +83,20 @@ const store = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req); 
 
-    validData.user_id = req.user.id;
+	debug("Valid Data:", validData)
+
+    validData.user_id = req.user.get('id');
+
+	debug("Valid Data user id:", validData.user_id)
+
+
+	debug("User Id:", req.user_id)
+
+	debug("User Id:", req.user.id)
+
+	debug("Req Body:", req.body)
+
+	debug("user:", user)
 
     try {
 
@@ -83,6 +125,9 @@ const store = async (req, res) => {
 const addPhotoToAlbum = async (req, res) => {
 	// get only the validated data from the request
 	const validData = matchedData(req);
+	validData.album_id = req.params.albumId
+
+	await req.user.load('albums')
 
 	const albumId = req.params.albumId;
 
@@ -111,13 +156,24 @@ const addPhotoToAlbum = async (req, res) => {
 	const userAlbum = user.related('albums').find(album => album.id == req.params.albumId);
 	const userPhoto = user.related('photos').find(photo => photo.id == validData.photo_id);
 
-	if (!userAlbum || !userPhoto) {
+	if (!userAlbum) {
 		debug('Cannot add photo to album you do not own. %o', {
 			id: req.params.albumId,
 		});
 		res.status(403).send({
 			status: 'fail',
 			data: "Action denied. This album doesn't belong to you!",
+		});
+		return;
+	}
+
+	if (!userPhoto) {
+		debug("You don't own this photo. %o", {
+			id: validData.photo_id
+		})
+		res.status(403).send({
+			status: 'fail',
+			data: "Action denied. This photo doesn't belong to you!",
 		});
 		return;
 	}
