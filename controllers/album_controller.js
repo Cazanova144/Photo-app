@@ -14,8 +14,6 @@ const models = require('../models');
 const index = async (req, res) => {
 	const all_albums = await req.user.load('albums');
 
-	debug(req.user.load('albums'))
-
 	res.send({
 		status: 'success',
 		data: {

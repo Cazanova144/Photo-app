@@ -10,8 +10,6 @@ const { User } = require('../models');
  * HTTP Basic Authentication
  */
 const basic = async (req, res, next) => {
-    debug("Denna funkar");
-
 	// make sure Authorization header exists, otherwise bail
 	if (!req.headers.authorization) {
 		debug("Authorization header missing");
