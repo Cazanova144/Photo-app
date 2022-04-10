@@ -70,8 +70,6 @@ const show = async (req, res) => {
 const store = async (req, res) => {
 	const userId = req.user.get('id')
 
-	debug(userId)
-
 	const user = await models.User.fetchById(userId, { withRelated: ['albums'] });
 
 	// check for any validation errors
@@ -86,17 +84,6 @@ const store = async (req, res) => {
 	debug("Valid Data:", validData)
 
     validData.user_id = req.user.get('id');
-
-	debug("Valid Data user id:", validData.user_id)
-
-
-	debug("User Id:", req.user_id)
-
-	debug("User Id:", req.user.id)
-
-	debug("Req Body:", req.body)
-
-	debug("user:", user)
 
     try {
 
