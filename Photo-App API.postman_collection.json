@@ -41,12 +41,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/users",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"users"
 							]
@@ -65,12 +66,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -87,15 +88,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/1",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/users/14",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"users",
-								"1"
+								"14"
 							]
 						}
 					},
@@ -103,6 +105,50 @@
 				},
 				{
 					"name": "POST /register",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"so@tired.com\",\n  \"password\": \"sleepysleep\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Blund\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://lit-temple-46210.herokuapp.com/register",
+							"protocol": "https",
+							"host": [
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST /login",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -123,7 +169,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"email\": \"\",\n  \"password\": \"\",\n  \"first_name\": \"\",\n  \"last-name\": \"\"\n}",
+							"raw": "{\n    \"email\": \"johan@developer.com\",\n    \"password\": \"ilovejava123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -131,14 +177,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/register",
+							"raw": "http://localhost:3000/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"register"
+								"login"
 							]
 						}
 					},
@@ -160,12 +206,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -206,12 +252,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -228,34 +274,35 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/albums/1",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/albums/2",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"albums",
-								"1"
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "POST /:albumId",
+					"name": "POST /",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -264,7 +311,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"\" \n}",
+							"raw": "{\n  \"title\": \"New album\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -272,15 +319,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/albums/6",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/albums",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
-								"albums",
-								"6"
+								"albums"
 							]
 						}
 					},
@@ -294,12 +341,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -308,7 +355,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"photo_id\": \n}",
+							"raw": "{\n  \"photo_id\": 8\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -316,15 +363,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/albums/5/photos",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/albums/30/photos",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"albums",
-								"5",
+								"30",
 								"photos"
 							]
 						}
@@ -339,12 +387,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -353,7 +401,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"\"\n}",
+							"raw": "{\n  \"title\": \"Coffee Album\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -361,15 +409,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/albums/4",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/albums/30",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"albums",
-								"4"
+								"30"
 							]
 						}
 					},
@@ -391,12 +440,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -413,12 +462,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/photos",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/photos",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"photos"
 							]
@@ -437,12 +487,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -459,15 +509,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/photos/3",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/photos/1",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"photos",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -481,12 +532,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -495,7 +546,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"\",\n  \"url\": \"\",\n  \"comment\": \"\"\n}",
+							"raw": "{\n  \"title\": \"Good coffee\",\n  \"url\": \"https://joya.info/images/content/438914-1200x700c56x50-Kaffee-mit-pflanzlicher-Milch-Barista_1200x798.jpg\",\n  \"comment\": \"Mmh so tasty\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -503,12 +554,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/photos",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/photos",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"photos"
 							]
@@ -524,12 +576,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "randompassword",
+									"value": "ilovejava123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "random@user.com",
+									"value": "johan@developer.com",
 									"type": "string"
 								}
 							]
@@ -538,7 +590,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"\",\n  \"comment\": \"\"\n}",
+							"raw": "{\n  \"title\": \"Great Coffee\",\n  \"comment\": \"Such taste many energi\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -546,15 +598,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/photos/4",
-							"protocol": "http",
+							"raw": "https://lit-temple-46210.herokuapp.com/photos/8",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"lit-temple-46210",
+								"herokuapp",
+								"com"
 							],
-							"port": "3000",
 							"path": [
 								"photos",
-								"4"
+								"8"
 							]
 						}
 					},
