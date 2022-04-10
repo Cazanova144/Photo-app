@@ -76,20 +76,17 @@ const login = async (req, res) => {
 
 	const { email, password } = req.body;
 
-	debug(email)
-	debug(password)
-
 	// find user based on the username (bail if no such user exists)
 	const user = await models.User.login(email, password);
-
-	debug(user)
 
 	if (!user) {
 		res.status(401).send({
 			status: 'fail',
 			data: 'Authentication failed.',
 		})
+		return
 	}
+
 
 	try {
 		const hash = user.get('password');
@@ -98,20 +95,17 @@ const login = async (req, res) => {
 		// and compare if the generated hash matches the db-hash
 		const result = await bcrypt.compare(password, hash);
 
-		res.send({
+		res.status(200).send({
 			status: 'success',
 			data: {
 				result,
 			},
 		});
 	} catch (error) {
-		debug('Lösenordet')
-
 		res.status(401).send({
 			status: 'fail',
 			data: 'Authentication failed.',
 		});
-
 		throw error
 	}
 
