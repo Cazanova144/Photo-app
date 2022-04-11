@@ -12,9 +12,11 @@ const models = require('../models');
  * GET /
  */
 const index = async (req, res) => {
-	const all_albums = await req.user.load('albums');
+	const userId = req.user.get('id')
 
-	res.send({
+	const all_albums = await models.User.fetchById(userId, { withRelated: ['albums'] });
+
+	res.status(200).send({
 		status: 'success',
 		data: {
             all_albums,
