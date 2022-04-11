@@ -16,9 +16,8 @@ const index = async (req, res) => {
 
 	res.send({
 		status: 'success',
-		data: {
-            photos: all_photos,
-        },
+		data: 
+            all_photos,
 	});
 }
 
