@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 module.exports = (bookshelf) => {
 	return bookshelf.model('User', {
 		tableName: 'users',
-		hidden: ['password'],
+		hidden: ['password', 'id', 'email', 'first_name', 'last_name', 'user_id'],
 		albums() {
 			return this.hasMany('Album');
 		}, 
